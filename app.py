@@ -130,7 +130,7 @@ if prompt := st.chat_input("说说你最近做了什么了不起的事..."):
         st.markdown(prompt)
     with st.chat_message("assistant", avatar="😎"):
         try:
-            api_key = os.getenv("SILICONFLOW_API_KEY")
+            api_key = st.secrets.get("SILICONFLOW_API_KEY", st.secrets.get("SILICONFLOW_API_KEY", os.getenv("SILICONFLOW_API_KEY")))
             if not api_key:
                 st.error("未找到 API 密钥，请检查 .env 文件")
                 st.stop()
